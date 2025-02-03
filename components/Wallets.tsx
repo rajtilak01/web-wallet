@@ -10,12 +10,27 @@ import { Button } from './ui/button';
 import { motion } from "motion/react";
 
 
-function Wallets({ mnemonic, showMnemonic }: { mnemonic: string, showMnemonic: boolean }) {
-
-    const [currentIndexSolana, setCurrentIndexSolana] = useState(0);
-    const [publicKeysSolana, setPublicKeysSolana] = useState<string[]>([]);
-    const [currentIndexEth, setCurrentIndexEth] = useState(0);
-    const [publicKeysEth, setPublicKeysEth] = useState<string[]>([]);
+function Wallets({ mnemonic,
+    showMnemonic,
+    currentIndexSolana,
+    setCurrentIndexSolana,
+    publicKeysSolana,
+    setPublicKeysSolana,
+    currentIndexEth,
+    setCurrentIndexEth,
+    publicKeysEth,
+    setPublicKeysEth }: {
+        mnemonic: string,
+        showMnemonic: boolean,
+        publicKeysSolana: string[],
+        setPublicKeysSolana: (keys: string[]) => void,
+        publicKeysEth: string[],
+        setPublicKeysEth: (keys: string[]) => void,
+        currentIndexSolana: number,
+        setCurrentIndexSolana: (index: number) => void,
+        currentIndexEth: number,
+        setCurrentIndexEth: (index: number) => void
+    }) {
 
     function solanaWallet() {
         const seed = mnemonicToSeed(mnemonic);
@@ -43,17 +58,17 @@ function Wallets({ mnemonic, showMnemonic }: { mnemonic: string, showMnemonic: b
         <div className="flex gap-4 mb-4 bg-red-900">
             {showMnemonic && (
                 <div className='flex justify-center gap-4 w-screen'>
-                    <motion.div 
-                    whileHover={{scale: 1.1}}
-                    className='flex flex-col bg-blue-900'>
+                    <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        className='flex flex-col bg-blue-900'>
                         <div className="flex justify-center items-center bg-violet-900"><Button onClick={solanaWallet}>Add Solana Address</Button></div>
                         <div className='py-2 text-lg'>{publicKeysSolana.map(p => <div>
                             &bull; {p}
                         </div>)}</div>
                     </motion.div>
-                    <motion.div 
-                    whileHover={{scale: 1.1}}
-                    className='flex flex-col  bg-green-900'>
+                    <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        className='flex flex-col  bg-green-900'>
                         <div className="justify-center items-center flex bg-cyan-900"><Button onClick={ethWallet}>Add Eth Address</Button></div>
                         <div className='py-2 text-lg'>{publicKeysEth.map(p => <div>
                             &bull; {p}

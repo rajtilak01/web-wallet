@@ -11,25 +11,24 @@ import Wallets from "@/components/Wallets";
 export default function Home() {
   const [mnemonic, setMnemonic] = useState("");
   const [showMnemonic, setShowMnemonic] = useState(false);
-  const router = useRouter();
+  const [currentIndexSolana, setCurrentIndexSolana] = useState(0);
+  const [publicKeysSolana, setPublicKeysSolana] = useState<string[]>([]);
+  const [currentIndexEth, setCurrentIndexEth] = useState(0);
+  const [publicKeysEth, setPublicKeysEth] = useState<string[]>([]);
 
-  // function ethFunction() {
-  //   router.push("/wallets/eth")
-  // }
-
-  // function solanaFunction() {
-  //   router.push("/wallets/solana")
-  // }
-  
   async function generateMnemonicFunction() {
     const mn = await generateMnemonic();
-    setMnemonic(mn)
-    setShowMnemonic(true)
+    setMnemonic(mn);
+    setShowMnemonic(true);
   }
 
   function clearWallets() {
-    setShowMnemonic(false)
-    setMnemonic("")
+    setShowMnemonic(false);
+    setMnemonic("");
+    setCurrentIndexSolana(0);
+    setPublicKeysSolana([]);
+    setCurrentIndexEth(0);
+    setPublicKeysEth([]);
   }
   return (
     <main className="flex flex-col items-center justify-between ">
@@ -38,42 +37,42 @@ export default function Home() {
         <div className="flex gap-4 flex-col">
           {/* <Button onClick={ethFunction}>Etherium</Button>
           <Button onClick={solanaFunction}>Solana</Button> */}
-          <div className="justify-center items-center bg-red-500 flex">
+          <div className="justify-center items-center bg-red-500 flex mt-24">
 
-         {!showMnemonic && <Button onClick={generateMnemonicFunction}>Generate Seed Phrase</Button>}
+            {!showMnemonic && <Button variant={"default"} onClick={generateMnemonicFunction}>Generate Seed Phrase</Button>}
           </div>
 
           <div className="flex gap-4">
-          <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.3,
-                  ease: "easeInOut",
-                }}
-                whileHover={{ scale: 1.15 }}
-                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 justify-center w-full items-center mx-auto my-8"
-              >
-                {showMnemonic && mnemonic.split(" ").map((word, index) => (
-                  <p
-                    key={index}
-                    className="md:text-lg bg-red-500/5 hover:bg-red-500/10 transition-all duration-300 rounded-lg p-4"
-                  >
-                    {word}
-                  </p>
-                ))}
-              </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+              }}
+              whileHover={{ scale: 1.15 }}
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 justify-center w-full items-center mx-auto my-8"
+            >
+              {showMnemonic && mnemonic.split(" ").map((word, index) => (
+                <p
+                  key={index}
+                  className="md:text-lg bg-red-500/5 hover:bg-red-500/10 transition-all duration-300 rounded-lg p-4"
+                >
+                  {word}
+                </p>
+              ))}
+            </motion.div>
           </div>
-         
+
         </div>
         <div className="flex gap-4 mb-4">
           {/* <div className="w-1/2 bg-blue-900">{showMnemonic && <SolanaWallet mnemonic={mnemonic}/>}</div>
           <div className="w-1/2 bg-green-900">{showMnemonic && <EthWallet mnemonic={mnemonic}/>}</div> */}
 
-          <Wallets mnemonic={mnemonic} showMnemonic={showMnemonic}/>
+          <Wallets mnemonic={mnemonic} showMnemonic={showMnemonic} currentIndexSolana={currentIndexSolana} setCurrentIndexSolana={setCurrentIndexSolana} publicKeysSolana={publicKeysSolana} setPublicKeysSolana={setPublicKeysSolana} currentIndexEth={currentIndexEth} setCurrentIndexEth={setCurrentIndexEth} publicKeysEth={publicKeysEth} setPublicKeysEth={setPublicKeysEth} />
 
         </div>
-          {showMnemonic && <Button variant="destructive" onClick={clearWallets}>Clear Wallet</Button>} 
+        {showMnemonic && <Button variant="destructive" onClick={clearWallets}>Clear Wallet</Button>}
       </div>
     </main>
   );
