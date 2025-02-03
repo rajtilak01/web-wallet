@@ -6,6 +6,7 @@ import { generateMnemonic } from "bip39";
 import { SolanaWallet } from "@/components/SolanaWallet";
 import { EthWallet } from "@/components/EthWallet";
 import { motion } from "motion/react";
+import Wallets from "@/components/Wallets";
 
 export default function Home() {
   const [mnemonic, setMnemonic] = useState("");
@@ -65,12 +66,14 @@ export default function Home() {
           </div>
          
         </div>
-        <div>
-          {showMnemonic && <SolanaWallet mnemonic={mnemonic}/>}
-          {showMnemonic && <EthWallet mnemonic={mnemonic}/>}
+        <div className="flex gap-4 mb-4">
+          {/* <div className="w-1/2 bg-blue-900">{showMnemonic && <SolanaWallet mnemonic={mnemonic}/>}</div>
+          <div className="w-1/2 bg-green-900">{showMnemonic && <EthWallet mnemonic={mnemonic}/>}</div> */}
 
-          {showMnemonic && <Button variant="destructive" onClick={clearWallets}>Clear Wallet</Button>} 
+          <Wallets mnemonic={mnemonic} showMnemonic={showMnemonic}/>
+
         </div>
+          {showMnemonic && <Button variant="destructive" onClick={clearWallets}>Clear Wallet</Button>} 
       </div>
     </main>
   );
