@@ -5,6 +5,7 @@ import { useState } from "react";
 import { generateMnemonic } from "bip39";
 import { SolanaWallet } from "@/components/SolanaWallet";
 import { EthWallet } from "@/components/EthWallet";
+import { motion } from "motion/react";
 
 export default function Home() {
   const [mnemonic, setMnemonic] = useState("");
@@ -42,14 +43,25 @@ export default function Home() {
           </div>
 
           <div className="flex gap-4">
-          {showMnemonic && mnemonic.split(" ").map((word, index) => (
-              <p
-                key={index}
-                className="md:text-lg bg-foreground/5 hover:bg-foreground/10 transition-all duration-300 rounded-lg p-4"
+          <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut",
+                }}
+                whileHover={{ scale: 1.15 }}
+                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 justify-center w-full items-center mx-auto my-8"
               >
-                {word}
-              </p>
-            ))}
+                {showMnemonic && mnemonic.split(" ").map((word, index) => (
+                  <p
+                    key={index}
+                    className="md:text-lg bg-red-500/5 hover:bg-red-500/10 transition-all duration-300 rounded-lg p-4"
+                  >
+                    {word}
+                  </p>
+                ))}
+              </motion.div>
           </div>
          
         </div>
