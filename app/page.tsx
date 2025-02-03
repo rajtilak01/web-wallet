@@ -25,6 +25,10 @@ export default function Home() {
     setShowMnemonic(true)
   }
 
+  function clearWallets() {
+    setShowMnemonic(false)
+    setMnemonic("")
+  }
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 flex flex-col max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -34,7 +38,7 @@ export default function Home() {
           <Button onClick={solanaFunction}>Solana</Button> */}
           <div className="justify-center items-center bg-red-500 flex">
 
-          <Button onClick={generateMnemonicFunction}>Generate Seed Phrase</Button>
+         {!showMnemonic && <Button onClick={generateMnemonicFunction}>Generate Seed Phrase</Button>}
           </div>
 
           <div className="flex gap-4">
@@ -50,8 +54,10 @@ export default function Home() {
          
         </div>
         <div>
-          <SolanaWallet mnemonic={mnemonic}/>
-          <EthWallet mnemonic={mnemonic}/>
+          {showMnemonic && <SolanaWallet mnemonic={mnemonic}/>}
+          {showMnemonic && <EthWallet mnemonic={mnemonic}/>}
+
+          {showMnemonic && <Button variant="destructive" onClick={clearWallets}>Clear Wallet</Button>} 
         </div>
       </div>
     </main>
