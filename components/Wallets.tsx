@@ -7,6 +7,7 @@ import nacl from "tweetnacl"
 import { useState } from "react";
 import { Wallet, HDNodeWallet } from "ethers";
 import { Button } from './ui/button';
+import { motion } from "motion/react";
 
 
 function Wallets({ mnemonic, showMnemonic }: { mnemonic: string, showMnemonic: boolean }) {
@@ -42,18 +43,22 @@ function Wallets({ mnemonic, showMnemonic }: { mnemonic: string, showMnemonic: b
         <div className="flex gap-4 mb-4 bg-red-900">
             {showMnemonic && (
                 <div className='flex justify-center gap-4 w-screen'>
-                    <div className='flex flex-col bg-blue-900'>
-                        <div className="flex justify-center items-center bg-violet-900"><Button onClick={solanaWallet}>Solana</Button></div>
-                        <div className=''>{publicKeysSolana.map(p => <div>
+                    <motion.div 
+                    whileHover={{scale: 1.1}}
+                    className='flex flex-col bg-blue-900'>
+                        <div className="flex justify-center items-center bg-violet-900"><Button onClick={solanaWallet}>Add Solana Address</Button></div>
+                        <div className='py-2 text-lg'>{publicKeysSolana.map(p => <div>
                             &bull; {p}
                         </div>)}</div>
-                    </div>
-                    <div className='flex flex-col  bg-green-900'>
-                        <div className="justify-center items-center flex bg-cyan-900"><Button onClick={ethWallet}>Eth</Button></div>
-                        <div>{publicKeysEth.map(p => <div>
+                    </motion.div>
+                    <motion.div 
+                    whileHover={{scale: 1.1}}
+                    className='flex flex-col  bg-green-900'>
+                        <div className="justify-center items-center flex bg-cyan-900"><Button onClick={ethWallet}>Add Eth Address</Button></div>
+                        <div className='py-2 text-lg'>{publicKeysEth.map(p => <div>
                             &bull; {p}
                         </div>)}</div>
-                    </div>
+                    </motion.div>
                 </div>)}
         </div>
     )

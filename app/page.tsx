@@ -32,7 +32,7 @@ export default function Home() {
     setMnemonic("")
   }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex flex-col items-center justify-between ">
       <div className="z-10 flex flex-col max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         {/* <p className="text-3xl my-6">Choose a wallet to connect?</p> */}
         <div className="flex gap-4 flex-col">
