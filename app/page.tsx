@@ -36,7 +36,12 @@ export default function Home() {
 
             {!showMnemonic && <Button variant={"default"} onClick={generateMnemonicFunction}>Generate Seed Phrase</Button>}
           </div>
-
+          {showMnemonic && <motion.div  initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                ease: "easeInOut",
+              }} className='text-3xl text-center mt-4 flex-grow'>Here is your mnemonic phrase:</motion.div>}
           <div className="flex gap-4">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
