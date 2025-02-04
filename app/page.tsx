@@ -32,9 +32,55 @@ export default function Home() {
     <main className="flex flex-col items-center justify-between ">
       <div className="z-10 flex flex-col max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <div className="flex gap-4 flex-col">
-          <div className="justify-center items-center bg-red-500 flex mt-24">
+          <div className="justify-center items-center flex mt-24">
 
-            {!showMnemonic && <Button variant={"default"} onClick={generateMnemonicFunction}>Generate Seed Phrase</Button>}
+          {!showMnemonic && 
+  <div className='flex flex-col items-center'>
+    <motion.div 
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.8,    
+        ease: "easeOut",
+      }}
+      whileHover={{ scale: 1.02 }}
+      className=""
+    >
+      <div className='text-4xl text-center mt-4 transition-all duration-500 hover:text-red-500'>
+        Welcome to your Blockchain wallet!
+      </div>
+      <div className='text-center text-2xl my-4 transition-all duration-500 hover:text-red-500'>
+        Here you can generate a mnemonic phrase and get addresses of Solana and Ethereum wallets!
+      </div>
+    </motion.div>
+    
+          <motion.div 
+            className="flex justify-center items-center text-center px-4 py-2 mt-4"
+            whileHover={{ scale: 1.05 }} 
+            transition={{ duration: 0.3 }}
+          >
+            <Button 
+              className='inline-flex text-4xl justify-center items-center text-center my-4 w-auto px-6 py-3 transition-all duration-500 bg-blue-500 text-white rounded-lg '
+              variant={"default"} 
+              onClick={generateMnemonicFunction}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,    
+                  ease: "easeOut",
+                }}
+                whileHover={{ scale: 1.1 }}
+              >
+                Generate Mnemonic
+              </motion.div>
+            </Button>
+          </motion.div>
+        </div>
+      }
+
+
           </div>
           {showMnemonic && <motion.div  initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
