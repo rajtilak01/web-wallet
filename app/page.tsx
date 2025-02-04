@@ -1,10 +1,10 @@
 'use client'
 import { Button } from "@/components/ui/button";
-import { useRouter } from 'next/navigation';
 import { useState } from "react";
 import { generateMnemonic } from "bip39";
 import { motion } from "motion/react";
 import Wallets from "@/components/Wallets";
+import { DrawerComponent } from "@/components/Drawer";
 
 export default function Home() {
   const [mnemonic, setMnemonic] = useState("");
@@ -13,6 +13,7 @@ export default function Home() {
   const [publicKeysSolana, setPublicKeysSolana] = useState<string[]>([]);
   const [currentIndexEth, setCurrentIndexEth] = useState(0);
   const [publicKeysEth, setPublicKeysEth] = useState<string[]>([]);
+  const [showDrawer, setShowDrawer] = useState(false);
 
   async function generateMnemonicFunction() {
     const mn = await generateMnemonic();
@@ -55,12 +56,12 @@ export default function Home() {
     </motion.div>
     
           <motion.div 
-            className="flex justify-center items-center text-center px-4 py-2 mt-4"
-            whileHover={{ scale: 1.05 }} 
-            transition={{ duration: 0.3 }}
+            className="flex flex-col justify-center items-center text-center px-4 py-2 mt-4"
+            // whileHover={{ scale: 1.05 }} 
+            // transition={{ duration: 0.3 }}
           >
             <Button 
-              className='inline-flex text-4xl justify-center items-center text-center my-4 w-auto px-6 py-3 transition-all duration-500 bg-blue-500 text-white rounded-lg '
+              className='inline-flex text-4xl justify-center items-center text-center my-4 w-auto px-6 py-3 transition-all duration-500 bg-blue-500 text-white rounded-lg'
               variant={"default"} 
               onClick={generateMnemonicFunction}
             >
@@ -75,6 +76,24 @@ export default function Home() {
               >
                 Generate Mnemonic
               </motion.div>
+            </Button>
+            <Button 
+              className='inline-flex text-3xl justify-center items-center text-center my-4 w-auto px-6 py-3 transition-all duration-500 bg-blue-500 text-white rounded-lg'
+              variant={"default"} 
+              onClick={() => setShowDrawer(true)}
+            >
+              <DrawerComponent />
+              {/* <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,    
+                  ease: "easeOut",
+                }}
+                whileHover={{ scale: 1.1 }}
+              >
+                Want to learn more?
+              </motion.div> */}
             </Button>
           </motion.div>
         </div>
