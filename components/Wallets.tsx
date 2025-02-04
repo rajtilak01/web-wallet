@@ -1,5 +1,4 @@
-import { SolanaWallet } from './SolanaWallet';
-import { EthWallet } from './EthWallet';
+'use client'
 import { mnemonicToSeed } from "bip39";
 import { derivePath } from "ed25519-hd-key";
 import { Keypair } from "@solana/web3.js";
@@ -9,8 +8,7 @@ import { Wallet, HDNodeWallet } from "ethers";
 import { Button } from './ui/button';
 import { motion } from "motion/react";
 
-
-function Wallets({ mnemonic,
+export default function Wallets({ mnemonic,
     showMnemonic,
     currentIndexSolana,
     setCurrentIndexSolana,
@@ -53,30 +51,51 @@ function Wallets({ mnemonic,
         setCurrentIndexEth(currentIndexEth + 1);
         setPublicKeysEth([...publicKeysEth, wallet.address]);
     }
-
     return (
-        <div className="flex gap-4 mb-4 bg-red-900">
-            {showMnemonic && (
-                <div className='flex justify-center gap-4 w-screen'>
-                    <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        className='flex flex-col bg-blue-900'>
-                        <div className="flex justify-center items-center bg-violet-900"><Button onClick={solanaWallet}>Add Solana Address</Button></div>
-                        <div className='py-2 text-lg'>{publicKeysSolana.map(p => <div>
-                            &bull; {p}
-                        </div>)}</div>
-                    </motion.div>
-                    <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        className='flex flex-col  bg-green-900'>
-                        <div className="justify-center items-center flex bg-cyan-900"><Button onClick={ethWallet}>Add Eth Address</Button></div>
-                        <div className='py-2 text-lg'>{publicKeysEth.map(p => <div>
-                            &bull; {p}
-                        </div>)}</div>
-                    </motion.div>
-                </div>)}
+        <div className="flex gap-4 mb-4 relative">
+          {showMnemonic && (
+            <div className="flex justify-center gap-4 w-screen">
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut",
+                }}
+                whileHover={{ scale: 1.1, zIndex: 20 }}
+                className="flex z-10 flex-col w-2/5 rounded-lg bg-[#2a2a2a] hover:z-20 transition-all shadow-lg"
+              >
+                <div className="flex justify-center items-center my-2">
+                  <Button onClick={solanaWallet}>Add Solana Address</Button>
+                </div>
+                <div >
+                  {publicKeysSolana.map((p, index) => (
+                    <div className="py-2 px-3 text-lg" key={index}>&bull; Index {index + 1}: {p}</div>
+                  ))}
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut",
+                }}
+                whileHover={{ scale: 1.1, zIndex: 22 }}
+                className="flex z-0 flex-col w-2/5 rounded-lg bg-[#2a2a2a] hover:z-20 transition-all shadow-lg"
+              >
+                <div className="justify-center items-center flex my-2">
+                  <Button onClick={ethWallet}>Add Eth Address</Button>
+                </div>
+                <div className="">
+                  {publicKeysEth.map((p, index) => (
+                    <div className="py-2 px-3 text-lg" key={index}>&bull; Index {index + 1}: {p}</div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          )}
         </div>
-    )
-}
-
-export default Wallets
+      );
+      
+}   

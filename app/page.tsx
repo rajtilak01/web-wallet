@@ -3,8 +3,6 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
 import { generateMnemonic } from "bip39";
-import { SolanaWallet } from "@/components/SolanaWallet";
-import { EthWallet } from "@/components/EthWallet";
 import { motion } from "motion/react";
 import Wallets from "@/components/Wallets";
 
@@ -33,10 +31,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between ">
       <div className="z-10 flex flex-col max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        {/* <p className="text-3xl my-6">Choose a wallet to connect?</p> */}
         <div className="flex gap-4 flex-col">
-          {/* <Button onClick={ethFunction}>Etherium</Button>
-          <Button onClick={solanaFunction}>Solana</Button> */}
           <div className="justify-center items-center bg-red-500 flex mt-24">
 
             {!showMnemonic && <Button variant={"default"} onClick={generateMnemonicFunction}>Generate Seed Phrase</Button>}
@@ -47,28 +42,31 @@ export default function Home() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.3,
+                duration: 0.5,
                 ease: "easeInOut",
               }}
               whileHover={{ scale: 1.15 }}
               className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 justify-center w-full items-center mx-auto my-8"
             >
               {showMnemonic && mnemonic.split(" ").map((word, index) => (
-                <p
+                <motion.p
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: "easeInOut",
+                  }}
                   key={index}
                   className="md:text-lg bg-red-500/5 hover:bg-red-500/10 transition-all duration-300 rounded-lg p-4"
                 >
                   {word}
-                </p>
+                </motion.p>
               ))}
             </motion.div>
           </div>
 
         </div>
         <div className="flex gap-4 mb-4">
-          {/* <div className="w-1/2 bg-blue-900">{showMnemonic && <SolanaWallet mnemonic={mnemonic}/>}</div>
-          <div className="w-1/2 bg-green-900">{showMnemonic && <EthWallet mnemonic={mnemonic}/>}</div> */}
-
           <Wallets mnemonic={mnemonic} showMnemonic={showMnemonic} currentIndexSolana={currentIndexSolana} setCurrentIndexSolana={setCurrentIndexSolana} publicKeysSolana={publicKeysSolana} setPublicKeysSolana={setPublicKeysSolana} currentIndexEth={currentIndexEth} setCurrentIndexEth={setCurrentIndexEth} publicKeysEth={publicKeysEth} setPublicKeysEth={setPublicKeysEth} />
 
         </div>
