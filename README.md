@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mnemonic Generator & Wallet Address Creator
 
-## Getting Started
+This is a **Next.js** project that generates a **BIP-39 mnemonic** and derives **Ethereum** and **Solana** wallet addresses from it.
 
-First, run the development server:
+## Features
+- Generate a **BIP-39 mnemonic** using the `bip39` npm package
+- Derive **Ethereum** addresses from the mnemonic
+- Derive **Solana** addresses from the mnemonic
+- Simple and user-friendly UI with Next.js
 
+## Tech Stack
+- **Next.js** - React framework for server-side rendering
+- **bip39** - Mnemonic generation and validation
+- **ethers.js** - Ethereum wallet derivation
+- **@solana/web3.js** - Solana wallet derivation
+
+## Installation
+
+### 1. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/rajtilak01/web-wallet.git
+cd web-wallet
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
+```bash
+npm install  # or yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Run the Development Server
+```bash
+npm run dev  # or yarn dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
+1. Click the **Generate Mnemonic** button to create a new mnemonic phrase.
+2. View the generated **Ethereum** and **Solana** wallet addresses.
+3. Copy and save your mnemonic safely, as it can restore your wallets.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Security Notice
+- **Do NOT use this tool for real funds** unless you fully understand the security risks.
+- **Always keep your mnemonic private** and never share it online.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
+This project is licensed under the **MIT License**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributions
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Author:** Rajtilak Pandey
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
