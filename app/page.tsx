@@ -5,6 +5,7 @@ import { generateMnemonic } from "bip39";
 import { motion } from "motion/react";
 import Wallets from "@/components/Wallets";
 import { DrawerComponent } from "@/components/Drawer";
+import BlurryBlob from "@/components/animata/background/blurry-blob";
 
 export default function Home() {
   const [mnemonic, setMnemonic] = useState("");
@@ -30,11 +31,13 @@ export default function Home() {
     setPublicKeysEth([]);
   }
   return (
+    <>
+    <BlurryBlob firstBlobColor="bg-red-400" secondBlobColor="bg-green-400" thirdBlobColor="bg-blue-400" fourthBlobColor="bg-yellow-400" />
+    
     <main className="flex flex-col items-center justify-between ">
       <div className="z-10 flex flex-col max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <div className="flex gap-4 flex-col">
           <div className="justify-center items-center flex mt-24">
-
           {!showMnemonic && 
   <div className='flex flex-col items-center'>
     <motion.div 
@@ -99,7 +102,7 @@ export default function Home() {
         </div>
       }
 
-
+{/* <BlurryBlob firstBlobColor="bg-red-400" secondBlobColor="bg-green-400" /> */}
           </div>
           {showMnemonic && <motion.div  initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -143,5 +146,6 @@ export default function Home() {
         {showMnemonic && <Button variant="destructive" onClick={clearWallets}>Clear Wallet</Button>}
       </div>
     </main>
+    </>
   );
 }
